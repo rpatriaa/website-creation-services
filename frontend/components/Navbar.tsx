@@ -1,62 +1,179 @@
-import React from "react";
+'use client'
+
+import React, { useState } from 'react'
+import { motion, AnimatePresence, easeOut } from 'framer-motion'
 
 const Navbar = () => {
+    const [isOpen, setIsOpen] = useState(false)
+    const [isProductsOpen, setIsProductsOpen] = useState(false)
+
+    const menuVariants = {
+        hidden: { opacity: 0, x: -20 },
+        visible: {
+            opacity: 1,
+            x: 0,
+            transition: {
+                duration: 0.3,
+                ease: easeOut,
+            },
+        },
+        exit: {
+            opacity: 0,
+            x: -20,
+            transition: {
+                duration: 0.2,
+            },
+        },
+    }
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: -5 },
+        visible: (i: number) => ({
+            opacity: 1,
+            y: 0,
+            transition: {
+                delay: i * 0.05,
+                duration: 0.3,
+            },
+        }),
+    }
+
+    const navLinks = [
+        { label: 'Beranda', href: '#' },
+        { label: 'Portfolio', href: '#portfolio' },
+        { label: 'Layanan', href: '#services' },
+        { label: 'Tentang', href: '#about' },
+        { label: 'Kontak', href: '#contact' },
+    ]
+
     return (
-        <div className="h-130 max-md:h-[31.25rem]">
-            <nav className="navbar shadow-base-300/20 shadow-sm">
-                <div className="navbar-start">
-                <a className="link text-base-content link-neutral text-xl font-bold no-underline" href="#">
-                    FlyonUI
-                </a>
-                </div>
-                <div className="navbar-center max-md:hidden">
-                <label className="swap swap-rotate">
-                    <input type="checkbox" value="dark" className="theme-controller" />
-                    <span className="swap-off icon-[tabler--sun] size-7"></span>
-                    <span className="swap-on icon-[tabler--moon] size-7"></span>
-                </label>
-                </div>
-                <div className="navbar-end items-center gap-4">
-                <div className="max-md:hidden">
-                <ul className="menu menu-horizontal gap-2 p-0 text-base rtl:ml-20">
-                    <li><a className="dropdown-item" href="#">Profile</a></li>
-                    <li className="dropdown relative inline-flex [--auto-close:inside] [--offset:9]">
-                    <button id="dropdown-end" type="button" className="dropdown-toggle dropdown-open:bg-base-content/10 dropdown-open:text-base-content max-md:px-2" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
-                        Products
-                        <span className="icon-[tabler--chevron-down] dropdown-open:rotate-180 size-4"></span>
-                    </button>
-                    <ul className="dropdown-menu dropdown-open:opacity-100 hidden w-48" role="menu" aria-orientation="vertical" aria-labelledby="nested-dropdown">
-                        <li><a className="dropdown-item" href="#">Templates</a></li>
-                    </ul>
-                    </li>
-                    <li><a href="#">Gallery</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-                </div>
-                <div className="dropdown relative inline-flex [--placement:bottom] md:hidden">
-                    <button id="dropdown-default" type="button" className="dropdown-toggle btn btn-text btn-secondary btn-square" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
-                    <span className="icon-[tabler--menu-2] dropdown-open:hidden size-5"></span>
-                    <span className="icon-[tabler--x] dropdown-open:block hidden size-5"></span>
-                    </button>
-                    <ul className="dropdown-menu dropdown-open:opacity-100 hidden min-w-60" role="menu" aria-orientation="vertical" aria-labelledby="dropdown-default">
-                    <li><a className="dropdown-item" href="#">Profile</a></li>
-                    <li className="dropdown relative [--auto-close:inside] [--offset:9] [--placement:bottom]">
-                        <button id="dropdown-end-2" className="dropdown-toggle dropdown-item dropdown-open:bg-base-content/10 dropdown-open:text-base-content justify-between" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
-                        Products
-                        <span className="icon-[tabler--chevron-right] size-4 rtl:rotate-180"></span>
-                        </button>
-                        <ul className="dropdown-menu dropdown-open:opacity-100 hidden w-48" role="menu" aria-orientation="vertical" aria-labelledby="nested-dropdown">
-                        <li><a className="dropdown-item" href="#">Templates</a></li>
+        <motion.nav
+            className="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-200/50"
+            initial={{ y: -100 }}
+            animate={{ y: 0 }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+        >
+            <div className="container mx-auto px-4 md:px-6">
+                <div className="flex items-center justify-between h-16 md:h-20">
+                    <a href="#" className="text-xl md:text-2xl font-bold bg-linear-to-br from-indigo-600 to-blue-600 bg-clip-text text-transparent">
+                        MazeCode
+                    </a>
+
+                    {/* Desktop Menu */}
+                    <div className="hidden md:flex items-center gap-8">
+                        <ul className="flex items-center gap-8">
+                            {navLinks.map((link, i) => (
+                                <motion.li
+                                    key={link.label}
+                                    custom={i}
+                                    initial="hidden"
+                                    animate="visible"
+                                    variants={itemVariants}
+                                >
+                                    <motion.a
+                                        href={link.href}
+                                        className="text-gray-700 font-medium relative group"
+                                        whileHover={{ color: '#4f46e5' }}
+                                    >
+                                        {link.label}
+                                        <motion.span
+                                            className="absolute bottom-0 left-0 w-0 h-0.5 bg-linear-to-br from-indigo-600 to-blue-600 group-hover:w-full transition-all duration-300"
+                                        />
+                                    </motion.a>
+                                </motion.li>
+                            ))}
                         </ul>
-                    </li>
-                    <li><a className="dropdown-item" href="#">Gallery</a></li>
-                    <li><a className="dropdown-item" href="#">Contact</a></li>
-                    </ul>
+                    </div>
+
+                    {/* Desktop CTA & Theme Toggle */}
+                    <div className="hidden md:flex items-center gap-4">
+                        <motion.label
+                            className="swap swap-rotate cursor-pointer"
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.95 }}
+                        >
+                            <input type="checkbox" value="dark" className="theme-controller" />
+                            <span className="swap-off icon-[tabler--sun] size-6 text-yellow-500"></span>
+                            <span className="swap-on icon-[tabler--moon] size-6 text-gray-700"></span>
+                        </motion.label>
+                        <motion.button
+                            className="px-6 py-2.5 bg-linear-to-br from-indigo-600 to-blue-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl"
+                            whileHover={{ scale: 1.05, boxShadow: '0 20px 25px -5px rgba(79, 70, 229, 0.4)' }}
+                            whileTap={{ scale: 0.95 }}
+                        >
+                            Mulai Sekarang
+                        </motion.button>
+                    </div>
+
+                    {/* Mobile Menu Toggle */}
+                    <motion.button
+                        className="md:hidden flex flex-col gap-1.5 p-2"
+                        onClick={() => setIsOpen(!isOpen)}
+                        whileTap={{ scale: 0.95 }}
+                    >
+                        <motion.span
+                            className="w-6 h-0.5 bg-gray-700 block"
+                            animate={{ rotate: isOpen ? 45 : 0, y: isOpen ? 8 : 0 }}
+                            transition={{ duration: 0.3 }}
+                        />
+                        <motion.span
+                            className="w-6 h-0.5 bg-gray-700 block"
+                            animate={{ opacity: isOpen ? 0 : 1 }}
+                            transition={{ duration: 0.3 }}
+                        />
+                        <motion.span
+                            className="w-6 h-0.5 bg-gray-700 block"
+                            animate={{ rotate: isOpen ? -45 : 0, y: isOpen ? -8 : 0 }}
+                            transition={{ duration: 0.3 }}
+                        />
+                    </motion.button>
                 </div>
-                </div>
-            </nav>
-        </div>
+
+                {/* Mobile Menu */}
+                <AnimatePresence>
+                    {isOpen && (
+                        <motion.div
+                            variants={menuVariants}
+                            initial="hidden"
+                            animate="visible"
+                            exit="exit"
+                            className="md:hidden pb-4 border-t border-gray-200/50"
+                        >
+                            <ul className="flex flex-col gap-2">
+                                {navLinks.map((link, i) => (
+                                    <motion.li
+                                        key={link.label}
+                                        custom={i}
+                                        variants={itemVariants}
+                                        initial="hidden"
+                                        animate="visible"
+                                    >
+                                        <a
+                                            href={link.href}
+                                            className="block px-4 py-2.5 text-gray-700 font-medium rounded-lg hover:bg-gray-100 transition-colors"
+                                            onClick={() => setIsOpen(false)}
+                                        >
+                                            {link.label}
+                                        </a>
+                                    </motion.li>
+                                ))}
+                            </ul>
+                            <motion.div className="flex gap-3 pt-4 px-4">
+                                <motion.button
+                                    className="flex-1 px-4 py-2.5 bg-linear-to-br from-indigo-600 to-blue-600 text-white font-semibold rounded-lg"
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    onClick={() => setIsOpen(false)}
+                                >
+                                    Mulai
+                                </motion.button>
+                            </motion.div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </div>
+        </motion.nav>
     )
 }
 
-export default Navbar;
+export default Navbar

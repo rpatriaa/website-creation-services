@@ -5,3 +5,12 @@
 @import 'flyonui/variants.css';
 @source "./node_modules/flyonui/flyonui.js";
 @source "./node_modules/flyonui/dist/accordion.js";
+@layer base {
+  body {
+    font-family: var(--font-inter);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-poppins);
+  }
+}
