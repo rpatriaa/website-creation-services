@@ -38,7 +38,7 @@ export default function Hero() {
 
   return (
     <section className="min-h-[90vh] flex items-center justify-center bg-linear-to-br from-blue-50 to-indigo-100">
-      <div className="container mx-auto px-4 md:px-6">
+      <div className="container mx-auto px-4 md:px-24">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
           {/* Left Content */}
           <div className="flex flex-col justify-center space-y-6">
@@ -69,23 +69,23 @@ export default function Hero() {
               Karena di dunia digital, kesan pertama bukan cuma penting — tapi menentukan.
             </motion.p>
 
-            {/* CTA Button */}
+            {/* CTA Button - Flyonui btn */}
             <div className="flex flex-wrap gap-4 pt-4" ref={buttonContainerRef}>
-                <button 
-                  ref={(el) => {
-                    buttonsRef.current[0] = el
-                  }}
-                  className="px-8 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors duration-300 shadow-lg hover:shadow-xl"
-                  onMouseEnter={() => handleButtonHover(0, true)}
-                  onMouseLeave={() => handleButtonHover(0, false)}
-                >
-                  Mulai Sekarang
-                </button>
-              <button 
+              <button
+                ref={(el) => {
+                  buttonsRef.current[0] = el
+                }}
+                className="btn btn-primary btn-lg shadow-lg hover:shadow-xl"
+                onMouseEnter={() => handleButtonHover(0, true)}
+                onMouseLeave={() => handleButtonHover(0, false)}
+              >
+                Mulai Sekarang
+              </button>
+              <button
                 ref={(el) => {
                   buttonsRef.current[1] = el
                 }}
-                className="px-8 py-3 border-2 border-indigo-600 text-indigo-600 font-semibold rounded-lg hover:bg-indigo-50 transition-colors duration-300"
+                className="btn btn-outline btn-primary btn-lg"
                 onMouseEnter={() => handleButtonHover(1, true)}
                 onMouseLeave={() => handleButtonHover(1, false)}
               >

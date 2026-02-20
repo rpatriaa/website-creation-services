@@ -53,7 +53,7 @@ const Navbar = () => {
             animate={{ y: 0 }}
             transition={{ duration: 0.5, ease: 'easeOut' }}
         >
-            <div className="container mx-auto px-4 md:px-6">
+            <div className="container mx-auto px-4 md:px-24">
                 <div className="flex items-center justify-between h-16 md:h-20">
                     <a href="#" className="text-xl md:text-2xl font-bold bg-linear-to-br from-indigo-600 to-blue-600 bg-clip-text text-transparent">
                         MazeCode

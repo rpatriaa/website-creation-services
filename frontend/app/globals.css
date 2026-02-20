@@ -3,14 +3,22 @@
 @plugin "@iconify/tailwind4";
 
 @import 'flyonui/variants.css';
+
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
 @source "./node_modules/flyonui/flyonui.js";
 @source "./node_modules/flyonui/dist/accordion.js";
 @layer base {
   body {
     font-family: var(--font-inter);
+    @apply bg-white text-gray-900;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-poppins);
+  }
+  * {
+    @apply border-gray-200 outline-gray-400/50;
   }
 }
