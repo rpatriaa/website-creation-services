@@ -4,10 +4,10 @@ import { motion } from 'framer-motion'
 
 export default function CTASection() {
   return (
-    <section className="flex items-center justify-center">
+    <section className="relative flex items-center justify-center">
       <div className="container mx-auto px-4 md:px-24">
         <motion.div
-          className="text-center py-12 md:py-16 bg-indigo-900 rounded-4xl"
+          className="text-center py-12 md:py-16 bg-indigo-950 rounded-4xl"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -18,7 +18,7 @@ export default function CTASection() {
 
           {/* Subtext */}
           <p className="text-lg md:text-xl text-indigo-100 mb-8 max-w-2xl mx-auto">
-            Konsultasi gratis! Ceritain kebutuhanmu, kami temukan solusinya.
+            Konsultasi gratis. Ceritakan kebutuhan dan kondisi Anda, kami bantu cari solusinya.
           </p>
 
           {/* WhatsApp Button - Flyonui btn */}

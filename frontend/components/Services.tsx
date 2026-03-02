@@ -75,57 +75,77 @@ const ServiceCard = ({
   )
 }
 
+/** Wave background di atas section Pilih Layanan */
+function SectionWaveTop() {
+  return (
+    <div className="absolute top-0 left-0 right-0 overflow-hidden pointer-events-none" aria-hidden>
+      <svg
+        className="block w-full h-[180px] md:h-[220px] text-primary/[0.06] rotate-180"
+        viewBox="0 0 1200 200"
+        preserveAspectRatio="none"
+      >
+        <path
+          fill="currentColor"
+          d="M0 120 Q 300 40, 600 120 T 1200 120 V 200 H 0 Z"
+          className="opacity-80"
+        />
+        <path
+          fill="currentColor"
+          d="M0 140 Q 300 80, 600 140 T 1200 140 V 200 H 0 Z"
+          className="opacity-50"
+        />
+        <path
+          fill="currentColor"
+          d="M0 160 Q 300 120, 600 160 T 1200 160 V 200 H 0 Z"
+          className="opacity-30"
+        />
+      </svg>
+    </div>
+  )
+}
+
 export default function Services() {
   const services: ServiceCardProps[] = [
     {
-      icon: '💻',
-      title: 'Tugas Coding',
+      icon: '🎨',
+      title: 'Landing Page',
       description:
-        'Bantu kerjain tugas kuliah, debug error, grok bikin project kecil untuk mata kuliah pemrograman.',
-      features: ['Debug Error', 'Tugas Kuliah', 'Project Kecil'],
-      price: 'Rp50.000',
+        'Saat Anda butuh tampil profesional di internet—promosi, profil, atau satu halaman yang to the point. Tampilan modern, responsive, dan ramah di mesin pencari.',
+      features: ['Responsive', 'Modern UI', 'SEO Friendly'],
+      price: 'Rp 2.000.000',
       priceLabel: 'Mulai dari',
       accentColor: 'blue',
       delay: 0,
     },
     {
-      icon: '🎨',
-      title: 'Landing Page',
+      icon: '🗄️',
+      title: 'Web App',
       description:
-        'Website satu halaman dengan tampilan clean dan modern, cocok untuk tugas, portfolio, atau event.',
-      features: ['Responsive', 'Modern UI', 'Fast Loading'],
-      price: 'Rp300.000',
+        'Saat Anda butuh sistem yang terstruktur—login, dashboard, data tersimpan rapi. Cocok untuk mengelola operasional atau akses yang berbeda per peran.',
+      features: ['Login System', 'Dashboard', 'Database'],
+      price: 'Rp 3.500.000',
       priceLabel: 'Mulai dari',
       accentColor: 'red',
       delay: 0.1,
     },
     {
-      icon: '🗄️',
-      title: 'Web App CRUD',
-      description:
-        'Sistem login, dashboard, dan database lengkap – cocok buat project akhir atau mini project kuliah.',
-      features: ['Login System', 'Dashboard', 'Database'],
-      price: 'Rp500.000',
-      priceLabel: 'Mulai dari',
-      accentColor: 'blue',
-      delay: 0.2,
-    },
-    {
       icon: '🚀',
       title: 'Fullstack Custom',
       description:
-        'Project besar dan custom sesuai kebutuhmu. Gratis konsultasi dulu via WhatsApp sebelum mulai.',
-      features: ['Full Custom', 'Konsultasi', 'Scalable'],
+        'Kebutuhan lebih spesifik atau skala besar? Kita diskusi dulu—gratis—lalu rangkai scope dan solusi yang sesuai kondisi dan budget Anda.',
+      features: ['Full Custom', 'Konsultasi Gratis', 'Scalable'],
       price: 'Konsultasi Gratis',
       priceLabel: 'Harga',
-      accentColor: 'red',
-      delay: 0.3,
+      accentColor: 'blue',
+      delay: 0.2,
     },
   ]
 
   return (
-    <section className="py-16 md:py-24 bg-white">
-      <div className="container mx-auto px-4 md:px-24">
+    <section id="services" className="relative py-16 md:py-24 bg-base-200/30 overflow-hidden">
+      <SectionWaveTop />
+      <div className="container relative mx-auto px-4 md:px-24">
+        
         {/* Header */}
         <motion.div
           className="text-center mb-12"
@@ -135,16 +155,15 @@ export default function Services() {
           viewport={{ once: true }}
         >
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-            Pilih <span className="text-indigo-600">Layanan</span> yang Kamu Butuh
+            Pilih <span className="text-indigo-600">Layanan</span> yang Anda Butuh
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Dari tugas kuliah sampai project fullstack, semua bisa diselesaikan dengan harga yang
-            ramah kantong mahasiswa.
+            Solusi sesuai kebutuhan dan kondisi bisnis Anda—dari yang sederhana sampai yang custom.
           </p>
         </motion.div>
 
-        {/* Service Cards Grid - Flyonui card-group optional; using grid for 4 cols */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Service Cards Grid - 3 layanan */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, idx) => (
             <ServiceCard key={service.title} {...service} />
           ))}

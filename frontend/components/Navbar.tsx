@@ -40,9 +40,10 @@ const Navbar = () => {
 
     const navLinks = [
         { label: 'Beranda', href: '#' },
-        { label: 'Portfolio', href: '#portfolio' },
         { label: 'Layanan', href: '#services' },
-        { label: 'Tentang', href: '#about' },
+        { label: 'Mengapa Kami', href: '#why-us' },
+        { label: 'Portfolio', href: '#portfolio' },
+        { label: 'Tentang Kami', href: '#about' },
         { label: 'Kontak', href: '#contact' },
     ]
 
@@ -87,15 +88,6 @@ const Navbar = () => {
 
                     {/* Desktop CTA & Theme Toggle */}
                     <div className="hidden md:flex items-center gap-4">
-                        <motion.label
-                            className="swap swap-rotate cursor-pointer"
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.95 }}
-                        >
-                            <input type="checkbox" value="dark" className="theme-controller" />
-                            <span className="swap-off icon-[tabler--sun] size-6 text-yellow-500"></span>
-                            <span className="swap-on icon-[tabler--moon] size-6 text-gray-700"></span>
-                        </motion.label>
                         <motion.button
                             className="px-6 py-2.5 bg-linear-to-br from-indigo-600 to-blue-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl"
                             whileHover={{ scale: 1.05, boxShadow: '0 20px 25px -5px rgba(79, 70, 229, 0.4)' }}
