@@ -14,7 +14,7 @@ export default function Footer() {
 
   return (
     <footer className="bg-indigo-950 text-indigo-100">
-      <div className="container mx-auto px-4 md:px-24 py-12 md:py-16">
+      <div className="container mx-auto px-4 md:px-8 lg:px-16 xl:px-24 py-12 md:py-16">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
           {/* Brand */}
           <div>

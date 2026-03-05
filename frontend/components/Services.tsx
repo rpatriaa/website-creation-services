@@ -144,7 +144,7 @@ export default function Services() {
   return (
     <section id="services" className="relative py-16 md:py-24 bg-base-200/30 overflow-hidden">
       <SectionWaveTop />
-      <div className="container relative mx-auto px-4 md:px-24">
+        <div className="container relative mx-auto px-4 md:px-8 lg:px-16 xl:px-24">
         
         {/* Header */}
         <motion.div

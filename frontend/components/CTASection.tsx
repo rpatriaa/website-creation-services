@@ -5,9 +5,9 @@ import { motion } from 'framer-motion'
 export default function CTASection() {
   return (
     <section className="relative flex items-center justify-center">
-      <div className="container mx-auto px-4 md:px-24">
+      <div className="container mx-auto px-4 md:px-8 lg:px-16 xl:px-24">
         <motion.div
-          className="text-center py-12 md:py-16 bg-indigo-950 rounded-4xl"
+          className="text-center py-12 md:py-16 px-6 md:px-10 bg-indigo-950 rounded-4xl"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}

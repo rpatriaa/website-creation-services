@@ -4,8 +4,8 @@ import { motion } from 'framer-motion'
 
 export default function TentangKami() {
   return (
-    <section id="about" className="relative bg-base-200/30 overflow-hidden">
-      <div className="container mx-auto px-4 md:px-24">
+    <section id="about" className="relative py-16 md:py-24 bg-base-200/30 overflow-hidden">
+      <div className="container mx-auto px-4 md:px-8 lg:px-16 xl:px-24">
         <motion.div
           className="text-center mb-12 md:mb-16"
           initial={{ opacity: 0, y: 20 }}

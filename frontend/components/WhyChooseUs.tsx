@@ -84,9 +84,9 @@ export default function WhyChooseUs() {
   return (
     <section
       id="why-us"
-      className="relative md:pb-16 pt-12 md:pt-16 bg-base-200/30 overflow-hidden"
+      className="relative pb-12 md:pb-16 pt-12 md:pt-16 bg-base-200/30 overflow-hidden"
     >
-      <div className="container relative mx-auto px-4 md:px-24">
+      <div className="container relative mx-auto px-4 md:px-8 lg:px-16 xl:px-24">
         {/* Header */}
         <motion.div
           className="text-left mb-12 md:mb-16"

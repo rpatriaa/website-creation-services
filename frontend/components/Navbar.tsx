@@ -2,10 +2,34 @@
 
 import React, { useState } from 'react'
 import { motion, AnimatePresence, easeOut } from 'framer-motion'
+import { useRouter } from 'next/navigation'
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false)
-    const [isProductsOpen, setIsProductsOpen] = useState(false)
+    const router = useRouter()
+
+    const handleNavClick = (href: string) => {
+        if (href === '#' || href === '/') {
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+            setIsOpen(false)
+            return
+        }
+
+        if (href.startsWith('#')) {
+            const id = href.slice(1)
+            const el = document.getElementById(id)
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth' })
+            } else {
+                router.push('/' + href)
+            }
+            setIsOpen(false)
+            return
+        }
+
+        router.push(href)
+        setIsOpen(false)
+    }
 
     const menuVariants = {
         hidden: { opacity: 0, x: -20 },
@@ -54,15 +78,19 @@ const Navbar = () => {
             animate={{ y: 0 }}
             transition={{ duration: 0.5, ease: 'easeOut' }}
         >
-            <div className="container mx-auto px-4 md:px-24">
-                <div className="flex items-center justify-between h-16 md:h-20">
-                    <a href="#" className="text-xl md:text-2xl font-bold bg-linear-to-br from-indigo-600 to-blue-600 bg-clip-text text-transparent">
+            <div className="container mx-auto px-4 md:px-8 lg:px-16 xl:px-24">
+                <div className="flex items-center justify-between h-16 lg:h-20">
+                    <button
+                        type="button"
+                        onClick={() => handleNavClick('#')}
+                        className="text-xl md:text-2xl font-bold bg-linear-to-br from-indigo-600 to-blue-600 bg-clip-text text-transparent text-left"
+                    >
                         MazeCode
-                    </a>
+                    </button>
 
                     {/* Desktop Menu */}
-                    <div className="hidden md:flex items-center gap-8">
-                        <ul className="flex items-center gap-8">
+                    <div className="hidden lg:flex items-center gap-8">
+                        <ul className="flex items-center gap-4 xl:gap-6">
                             {navLinks.map((link, i) => (
                                 <motion.li
                                     key={link.label}
@@ -71,35 +99,36 @@ const Navbar = () => {
                                     animate="visible"
                                     variants={itemVariants}
                                 >
-                                    <motion.a
-                                        href={link.href}
-                                        className="text-gray-700 font-medium relative group"
+                                    <motion.button
+                                        type="button"
+                                        onClick={() => handleNavClick(link.href)}
+                                        className="text-gray-700 font-medium relative group bg-transparent"
                                         whileHover={{ color: '#4f46e5' }}
                                     >
                                         {link.label}
                                         <motion.span
                                             className="absolute bottom-0 left-0 w-0 h-0.5 bg-linear-to-br from-indigo-600 to-blue-600 group-hover:w-full transition-all duration-300"
                                         />
-                                    </motion.a>
+                                    </motion.button>
                                 </motion.li>
                             ))}
                         </ul>
                     </div>
 
                     {/* Desktop CTA & Theme Toggle */}
-                    <div className="hidden md:flex items-center gap-4">
+                    <div className="hidden lg:flex items-center gap-4">
                         <motion.button
-                            className="px-6 py-2.5 bg-linear-to-br from-indigo-600 to-blue-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl"
+                            className="px-6 py-2.5 bg-indigo-950 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl"
                             whileHover={{ scale: 1.05, boxShadow: '0 20px 25px -5px rgba(79, 70, 229, 0.4)' }}
                             whileTap={{ scale: 0.95 }}
                         >
-                            Mulai Sekarang
+                            Konsultasi Gratis
                         </motion.button>
                     </div>
 
                     {/* Mobile Menu Toggle */}
                     <motion.button
-                        className="md:hidden flex flex-col gap-1.5 p-2"
+                        className="lg:hidden flex flex-col gap-1.5 p-2"
                         onClick={() => setIsOpen(!isOpen)}
                         whileTap={{ scale: 0.95 }}
                     >
@@ -129,7 +158,7 @@ const Navbar = () => {
                             initial="hidden"
                             animate="visible"
                             exit="exit"
-                            className="md:hidden pb-4 border-t border-gray-200/50"
+                            className="lg:hidden pb-4 border-t border-gray-200/50"
                         >
                             <ul className="flex flex-col gap-2">
                                 {navLinks.map((link, i) => (
@@ -140,13 +169,13 @@ const Navbar = () => {
                                         initial="hidden"
                                         animate="visible"
                                     >
-                                        <a
-                                            href={link.href}
-                                            className="block px-4 py-2.5 text-gray-700 font-medium rounded-lg hover:bg-gray-100 transition-colors"
-                                            onClick={() => setIsOpen(false)}
+                                        <button
+                                            type="button"
+                                            className="block w-full text-left px-4 py-2.5 text-gray-700 font-medium rounded-lg hover:bg-gray-100 transition-colors"
+                                            onClick={() => handleNavClick(link.href)}
                                         >
                                             {link.label}
-                                        </a>
+                                        </button>
                                     </motion.li>
                                 ))}
                             </ul>
