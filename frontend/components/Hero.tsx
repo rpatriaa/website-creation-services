@@ -10,22 +10,24 @@ export default function Hero() {
   const buttonsRef = useRef<(HTMLButtonElement | HTMLAnchorElement | null)[]>([])
 
   useEffect(() => {
-    // Animate buttons on mount
-    gsap.fromTo(
-      buttonsRef.current,
-      {
-        opacity: 0,
-        y: 20,
-      },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        stagger: 0.15,
-        delay: 1,
-        ease: 'back.out',
-      }
-    )
+    // Delay animation until after first paint to avoid forced reflow during initial layout
+    const id = requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        gsap.fromTo(
+          buttonsRef.current,
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            stagger: 0.15,
+            delay: 0.3,
+            ease: 'back.out',
+          }
+        )
+      })
+    })
+    return () => cancelAnimationFrame(id)
   }, [])
 
   const handleButtonHover = (index: number, isHovering: boolean) => {
